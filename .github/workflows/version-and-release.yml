@@ -8,7 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        java: [8, 8.0.192]  
     steps:
       - uses: actions/checkout@v2
 
@@ -22,7 +24,7 @@ jobs:
       - name: Set up publishing to maven central
         uses: actions/setup-java@v2
         with:
-          java-version: '8'
+          java-version: ${{ matrix.java }}
           distribution: 'adopt'
           server-id: ossrh
           server-username: MAVEN_USERNAME
